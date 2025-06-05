@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instant_extract/screens/ocr_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -52,7 +53,12 @@ class DashboardScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const OcrScreen()),
+          );
+        },
         backgroundColor: Colors.black,
         child: const Icon(Icons.camera_alt),
       ),
@@ -66,6 +72,7 @@ class DashboardScreen extends StatelessWidget {
         color: Colors.black,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
         ),
       ),
       child: Column(
@@ -153,13 +160,7 @@ class DashboardScreen extends StatelessWidget {
         leading: Image.asset(doc['image']!, width: 50),
         title: Text(doc['title']!),
         subtitle: Text("Date Created: ${doc['date']}\nLast Accessed: ${doc['accessed']}"),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.folder_open),
-            Text(doc['count']!)
-          ],
-        ),
+        trailing: const Icon(Icons.more_vert),
       ),
     );
   }

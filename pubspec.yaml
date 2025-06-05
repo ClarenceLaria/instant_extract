@@ -38,8 +38,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # google_mlkit_text_recognition: ^0.15.0
+  google_mlkit_text_recognition: ^0.15.0
   http: ^1.4.0
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
