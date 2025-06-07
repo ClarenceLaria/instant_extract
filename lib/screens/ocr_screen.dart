@@ -15,8 +15,8 @@ class _OcrScreenState extends State<OcrScreen> {
   File? _image;
   String _recognizedText = 'No text recognized';
 
-  Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
 
     if (pickedFile != null) {
       final inputImage = InputImage.fromFile(File(pickedFile.path));
@@ -40,13 +40,28 @@ class _OcrScreenState extends State<OcrScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton.icon(
-              icon: const Icon(Icons.image),
-              label: const Text("Pick Image"),
-              onPressed: _pickImage,
-            ),
+            Container(
+              height: 300,
+              color: Colors.grey,
+              child: _image != null ? Image.file(_image!) 
+              : Center(child: Text("Choose image..."),),
+              ),
             const SizedBox(height: 16),
-            if (_image != null) Image.file(_image!, height: 200),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.camera),
+                  label: const Text("Take Photo"),
+                  onPressed: () => _pickImage(ImageSource.camera),
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.image),
+                  label: const Text("Pick Image"),
+                  onPressed: () => _pickImage(ImageSource.gallery),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             const Text("Extracted Text:", style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
